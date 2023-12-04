@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { requestRegister } from '../services/requests';
+import { requestRegister } from '../services/requests';
 import { saveLogin } from '../services/handleStorage';
 
 export default function Redister() {
@@ -32,8 +32,8 @@ export default function Redister() {
     event.preventDefault();
     setFailedTryRegister(false);
     try {
-    //   const response = await requestRegister('/users', { name, email, password });
-      saveLogin('response');
+      const response = await requestRegister('/users', { name, email, password });
+      saveLogin(response);
       return navigate('/customer/products');
     } catch (error) {
       setFailedTryRegister(true);

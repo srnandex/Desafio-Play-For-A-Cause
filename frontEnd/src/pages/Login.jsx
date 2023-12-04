@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { requestLogin } from '../services/requests';
+import { requestLogin } from '../services/requests';
 import { saveLogin } from '../services/handleStorage';
 import '../style/loginStyle.css';
 
@@ -30,8 +30,8 @@ export default function Login() {
     event.preventDefault();
     setFailedTryLogin(false);
     try {
-    //   const response = await requestLogin('/login', { email, password });
-      saveLogin("response");
+      const response = await requestLogin('/login', { email, password });
+      saveLogin(response);
       navigate('/chat')
     } catch (error) {
       setFailedTryLogin(true);
