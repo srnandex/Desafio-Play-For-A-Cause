@@ -32,7 +32,7 @@ export default function Login() {
     try {
       const response = await requestLogin('/login', { email, password });
       saveLogin(response);
-      navigate('/chat')
+      navigate('/register')
     } catch (error) {
       setFailedTryLogin(true);
     }

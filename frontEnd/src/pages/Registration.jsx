@@ -32,9 +32,9 @@ export default function Redister() {
     event.preventDefault();
     setFailedTryRegister(false);
     try {
-      const response = await requestRegister('/users', { name, email, password });
+      const response = await requestRegister('/user', { email, password, name });
       saveLogin(response);
-      return navigate('/customer/products');
+      return navigate('/login');
     } catch (error) {
       setFailedTryRegister(true);
     }
