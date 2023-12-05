@@ -13,7 +13,6 @@ model User {
   name       String
   password   String
   Chat       Chat[]
-  created_at DateTime @default(now())
 }
 
 model Chat {
