@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import './App.css';
+import './App.css'
 import Registration from './pages/Registration';
 import ChatProvider from './context/ChatProvider';
 import Login from './pages/Login';

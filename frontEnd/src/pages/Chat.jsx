@@ -3,6 +3,9 @@ import React, {useRef, useState, useEffect, useContext} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { requestData, setToken } from '../services/requests';
 import { logout } from '../services/handleStorage';
+import {Input} from '@mui/material'
+import style from '../style/Chat.module.css'
+import SendIcon from '@mui/icons-material/Send';
 import ChatContext from '../context/ChatContext';
 import io from 'socket.io-client'
 
@@ -45,6 +48,9 @@ export default function Chat() {
   }, [socket])
 
   useEffect(()=>{
+    if (messageList.length > 0) {
+      scrollDown()
+    }
   }, [messageList])
 
   const handleSubmit = () => {
@@ -77,26 +83,49 @@ export default function Chat() {
       handleSubmit()
   }
 
+  const scrollDown = () => {
+    bottomRef.current.scrollIntoView({behavior: 'smooth'})
+  }
+
   if (loading) return <p>Loading...</p>;
 
   return (
     <div>
-      <div>
-        <h1>CHAT FOR PLAY</h1>
-        <div>
+      <div className={style['chat-container']}>
+        <div className={style["chat-body"]}>
         {
           messageList.map((message,index) => (
-            <div  key={index}>
-              <div><strong>{message.authorName}</strong></div>
-              <div>{message.content}</div>
+            <div className={`${style["message-container"]} ${message.authorId === socket.id && style["message-mine"]}`} key={index}>
+              <div className="message-author"><strong>{message.authorName}</strong></div>
+              <div className="message-text">{message.content}</div>
             </div>
           ))
         }
         <div ref={bottomRef} />
         </div>
-        <input ref={messageRef} placeholder='Mensagem' onKeyDown={(e)=>getEnterKey(e)}></input>
-        <button onClick={()=>handleSubmit()}>Enviar</button>
+        <div className={style["chat-footer"]}>
+          <Input inputRef={messageRef} placeholder='Mensagem' onKeyDown={(e)=>getEnterKey(e)} fullWidth />
+          <SendIcon sx={{m:1, cursor: 'pointer'}} onClick={()=>handleSubmit()} color="primary" />
+        </div>
       </div>
     </div>
+    // <div>
+    //   <div>
+    //     <h1>CHAT FOR PLAY</h1>
+    //     <div>
+    //     {
+    //       messageList.map((message,index) => (
+    //         <div  key={index}>
+    //           <div><strong>{message.authorName}</strong></div>
+    //           <div>{message.content}</div>
+    //         </div>
+    //       ))
+    //     }
+    //     <div ref={bottomRef} />
+    //     </div>
+    //     <input ref={messageRef} placeholder='Mensagem' onKeyDown={(e)=>getEnterKey(e)}></input>
+    //     <button onClick={()=>handleSubmit()}>Enviar</button>
+    //   </div>
+    // </div>
   )
 }

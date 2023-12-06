@@ -7,8 +7,5 @@
   },
   "scripts": {
     "dev:prestart": "./scripts/prestart-dev.sh"
-  },
-  "dependencies": {
-    "axios": "^1.6.2"
   }
 }
