@@ -1,15 +1,17 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { requestLogin } from '../services/requests';
 import { saveLogin } from '../services/handleStorage';
 import '../style/loginStyle.css';
+import ChatContext from '../context/ChatContext';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disableButton, setDisableButton] = useState(true);
   const [failedTryLogin, setFailedTryLogin] = useState(false);
+  const { getUser } = useContext(ChatContext);
 
   const navigate = useNavigate();
 
@@ -32,7 +34,8 @@ export default function Login() {
     try {
       const response = await requestLogin('/login', { email, password });
       saveLogin(response);
-      navigate('/register')
+      await getUser();
+      navigate('/chat')
     } catch (error) {
       setFailedTryLogin(true);
     }

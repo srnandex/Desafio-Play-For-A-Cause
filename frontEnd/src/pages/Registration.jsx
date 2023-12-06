@@ -15,7 +15,7 @@ export default function Redister() {
 
   useEffect(() => {
     const verifyRegisterData = () => {
-      const nameRule = 12;
+      const nameRule = 2;
       const passwordRule = 6;
       const errors = [
         !name || name.length < nameRule,
