@@ -6,7 +6,11 @@ Link api: https://psychotic-carriage-production.up.railway.app/  (use o /test pa
 
 observação:
 Ao se cadastrar sua senha deve ter
+
 -Letra maiuscula
+
 -Letra minúscula 
+
 -Números 
+
 -Caracteres especiais 
