@@ -18,13 +18,7 @@ function initialize_front_end() {
   )
 }
 
-function initialize_full() {
-  printf "\n> ASYNC: Instalando dependencias gerais"
-  (
-    npm install
-  )
-}
 
-initialize_back_end & initialize_front_end & initialize_full
+initialize_back_end & initialize_front_end
 
 printf "\n> Script terminado\n\n"
